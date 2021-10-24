@@ -27,6 +27,10 @@ p {
 header {
     background-color: @darkBlue;
     height: 72px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2000;
 }
 
 .logo {
@@ -86,6 +90,7 @@ header {
 
 nav {
     margin-bottom: 30px;
+    margin-top: 72px;
     padding: 0 10px;
 
     .container {
@@ -103,6 +108,10 @@ nav {
 .filter {
     font-size: 12px;
     font-weight: 700;
+
+    span {
+        display: none;
+    }
 
     img {
         margin-left: 6px;
@@ -126,6 +135,10 @@ button {
     padding: 6px 14px 6px 6px;
     margin-left: 18px;
 
+    span {
+        display: none;
+    }
+
     img {
         background-color: #fff;
         padding: 10px;
@@ -145,6 +158,14 @@ h1 {
 
     p {
         color: @gray;
+    }
+
+    span {
+        display: none;
+    }
+
+    #total-invoices {
+        display: inline;
     }
 }
 
@@ -249,12 +270,19 @@ main {
     }
 }
 
+.open {
+    background-color: #fff;
+    order: 6;
+    padding: 15px;
+    display: none;
+}
+
 .empty {
     display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+
 
     img {
         width: 190px;
@@ -273,26 +301,50 @@ main {
         width: 220px;
         text-align: center;
 
+    }
+
+    span:nth-child(2) {
+        display: none;
+    }
+
+    span:nth-child(3) {
+        font-weight: 700;
+    }
+
+    span {
         span {
-            font-weight: 700;
+            display: none;
         }
     }
 }
 
-.current-invoice{
-    display: none;
+.current-invoice {
+
+    //  display: none;
+    .navbar {
+        display: none;
+    }
 }
 
-.invoice-header {
+.invoice-nav {
     padding: 36px 24px;
 
     .status {
         margin-top: -26px;
     }
+
+    .navbar {
+        button {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+    }
+
+
 }
 
 .invoice-info,
-.invoice-header {
+.invoice-nav {
     background: #fff;
     margin-bottom: 15px;
     border-radius: 8px;
@@ -394,6 +446,10 @@ main {
     color: @darkGray;
 }
 
+.price {
+    padding-left: 0;
+}
+
 .grand-total-container {
     background-color: @darkBlue;
     color: #fff;
@@ -404,6 +460,10 @@ main {
     margin: 0;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+
+    span:nth-child(2) {
+        display: none;
+    }
 
     p {
         font-size: 11px;
@@ -431,7 +491,7 @@ main {
     background-color: lighten(@darkBlue, 70%);
 }
 
-.draft{
+.draft {
     background-color: @darkBlue;
     color: @gray;
 }
@@ -463,10 +523,11 @@ footer {
     justify-content: center;
     padding: 20px 0px;
     margin-top: 60px;
-    display: none;
-    button{
+    //  display: none;
+
+    button {
         padding: 16px 18px;
-        display: none;
+        //  display: none;
     }
 }
 
@@ -479,17 +540,30 @@ footer {
     background-color: @darkWhite;
     color: #000;
     padding: 0;
-    display: none;
-    
+    // display: none;
+
     img {
         margin-right: 25px;
     }
 }
 
+.offcanvas-start,
+.offcanvas-backdrop {
+    top: 72px;
+    overflow: hidden;
+}
+
+.offcanvas-start {
+    width: 100%;
+}
+
 .edit-invoice,
 .new-invoice {
 
-    display: none;
+    //  display: none;
+
+    background-color: #fff;
+    overflow: auto;
 
     p {
         color: @darkPurple;
@@ -510,8 +584,7 @@ footer {
     input {
         width: 100%;
         outline: none;
-        border: 1px solid lighten(@gray, 25%);
-        background-color: @darkWhite;
+        border: 1px solid lighten(@gray, 30%);
         border-radius: 4px;
         font-size: 12px;
         font-weight: bold;
@@ -558,14 +631,16 @@ form {
     }
 
     button {
-        background-color: @darkWhite;
+        background-color: #fff;
         padding: 10px;
         margin-top: 50px;
+        position: absolute;
+        right: 5px;
     }
 }
 
 .new-item {
-    background: darken(@lightGray, 1%);
+    background: darken(@lightGray, 0.5%);
     color: @darkGray;
     width: 100%;
     margin-bottom: 30px;
@@ -575,26 +650,266 @@ form {
     box-shadow: 0px 50px 50px 50px rgba(0, 0, 0, 0.2) !important;
 }
 
-.modal-content{
+.modal-content {
     padding: 20px;
     border: 0;
     border-radius: 8px;
     text-align: right;
-    p:first-child{
+
+    p:first-child {
         font-size: 20px;
         font-weight: 700;
         color: #000;
         margin-bottom: 10px;
     }
-    p{
+
+    p {
         color: @gray;
         text-align: left;
     }
-    button{
+
+    button {
         margin-top: 30px;
     }
 }
 
-.modal-dialog{
-    margin:0 20px;
+.modal {
+    padding: 20px;
 }
+
+.columns {
+    display: none;
+}
+
+@media (min-width:768px) {
+    header {
+        height: 80px;
+    }
+
+    nav {
+        margin-top: 80px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .invoices-num,
+    .filter,
+    .new {
+        span {
+            display: inline;
+        }
+    }
+
+
+    .logo {
+        width: 80px;
+
+        img {
+            height: 29px;
+        }
+    }
+
+    .invoice {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 5px 12px 24px;
+
+        &::after {
+            display: none;
+        }
+
+        p {
+            float: none;
+            margin: 0;
+            top: 0;
+        }
+
+        .single-invoice-num {
+            order: 1;
+        }
+
+        .name {
+            order: 3;
+            width: 110px;
+        }
+
+        .date {
+            order: 2;
+            width: 120px;
+        }
+
+        .total {
+            order: 4;
+            width: 120px;
+        }
+
+        .status {
+            order: 5;
+        }
+    }
+
+    .invoice-header {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 80px;
+
+        .address {
+            margin-top: 0;
+            text-align: right;
+        }
+    }
+
+    .open {
+        display: block;
+    }
+
+    .empty {
+        img {
+            width: 240px;
+        }
+
+        span:nth-child(1) {
+            display: none;
+        }
+
+        span:nth-child(2) {
+            display: inline;
+        }
+
+        p:nth-child(3) {
+            width: 250px;
+
+        }
+
+
+        span {
+            span {
+                display: inline !important;
+            }
+        }
+    }
+
+    .invoice-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+
+        .status {
+            margin: 0 0 0 20px;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar {
+            display: flex;
+        }
+    }
+
+
+    .main-footer {
+        display: none;
+    }
+
+    .offcanvas-start,
+    .offcanvas-backdrop {
+        top: 80px;
+    }
+
+    .offcanvas-start {
+        width: 620px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .footer-edit {
+        margin-top: 0;
+        border-top-right-radius: 20px;
+    }
+
+    .footer-new {
+        justify-content: flex-end;
+
+        .cancel {
+            margin-right: auto;
+        }
+    }
+
+    .form-header {
+        p {
+            margin-bottom: 30px;
+        }
+    }
+
+    .amount {
+        .row {
+            div:nth-child(1) {
+                order: 1;
+            }
+
+            div:nth-child(2) {
+                order: 4;
+                text-align: right;
+            }
+
+            div:nth-child(3) {
+                order: 2;
+                text-align: center;
+            }
+
+            div:nth-child(4) {
+                order: 3;
+                text-align: right;
+            }
+        }
+
+        .total {
+            top: 0;
+        }
+
+        .quantity {
+            width: 104px;
+            padding-right: 15px;
+
+            span {
+                display: none;
+            }
+        }
+    }
+
+    .columns {
+        display: flex;
+
+        p {
+            font-size: 12px;
+            color: @darkGray;
+            font-weight: 500;
+        }
+    }
+
+    .grand-total-container {
+        span:nth-child(1) {
+            display: none;
+        }
+
+        span:nth-child(2) {
+            display: block;
+        }
+    }
+
+    .modal-content {
+        padding: 30px;
+
+        p:nth-child(1) {
+            font-size: 24px;
+        }
+    }
+}
+

@@ -13,6 +13,10 @@ p {
 header {
   background-color: #373b53;
   height: 72px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2000;
 }
 .logo {
   height: 100%;
@@ -65,6 +69,7 @@ header {
 }
 nav {
   margin-bottom: 30px;
+  margin-top: 72px;
   padding: 0 10px;
 }
 nav .container {
@@ -79,6 +84,9 @@ nav .container {
 .filter {
   font-size: 12px;
   font-weight: 700;
+}
+.filter span {
+  display: none;
 }
 .filter img {
   margin-left: 6px;
@@ -98,6 +106,9 @@ button {
   padding: 6px 14px 6px 6px;
   margin-left: 18px;
 }
+.new span {
+  display: none;
+}
 .new img {
   background-color: #fff;
   padding: 10px;
@@ -114,6 +125,12 @@ h1 {
 }
 .invoices-num p {
   color: #888eb0;
+}
+.invoices-num span {
+  display: none;
+}
+.invoices-num #total-invoices {
+  display: inline;
 }
 main {
   padding: 0 10px;
@@ -193,6 +210,12 @@ main {
 .status-draft::before {
   background-color: #373b53;
 }
+.open {
+  background-color: #fff;
+  order: 6;
+  padding: 15px;
+  display: none;
+}
 .empty {
   display: none;
   justify-content: center;
@@ -214,20 +237,30 @@ main {
   width: 220px;
   text-align: center;
 }
-.empty p:nth-child(3) span {
-  font-weight: 700;
-}
-.current-invoice {
+.empty span:nth-child(2) {
   display: none;
 }
-.invoice-header {
+.empty span:nth-child(3) {
+  font-weight: 700;
+}
+.empty span span {
+  display: none;
+}
+.current-invoice .navbar {
+  display: none;
+}
+.invoice-nav {
   padding: 36px 24px;
 }
-.invoice-header .status {
+.invoice-nav .status {
   margin-top: -26px;
 }
+.invoice-nav .navbar button {
+  margin-right: 0;
+  margin-left: 8px;
+}
 .invoice-info,
-.invoice-header {
+.invoice-nav {
   margin-bottom: 15px;
   border-radius: 8px;
   background: #fff;
@@ -307,6 +340,9 @@ main {
 .price {
   color: #7e88c3;
 }
+.price {
+  padding-left: 0;
+}
 .grand-total-container {
   background-color: #373b53;
   color: #fff;
@@ -317,6 +353,9 @@ main {
   margin: 0;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+.grand-total-container span:nth-child(2) {
+  display: none;
 }
 .grand-total-container p {
   font-size: 11px;
@@ -366,11 +405,9 @@ footer {
   justify-content: center;
   padding: 20px 0px;
   margin-top: 60px;
-  display: none;
 }
 footer button {
   padding: 16px 18px;
-  display: none;
 }
 .footer-edit {
   justify-content: flex-end;
@@ -380,14 +417,22 @@ footer button {
   background-color: #f8f8fb;
   color: #000;
   padding: 0;
-  display: none;
 }
 .back img {
   margin-right: 25px;
 }
+.offcanvas-start,
+.offcanvas-backdrop {
+  top: 72px;
+  overflow: hidden;
+}
+.offcanvas-start {
+  width: 100%;
+}
 .edit-invoice,
 .new-invoice {
-  display: none;
+  background-color: #fff;
+  overflow: auto;
 }
 .edit-invoice p,
 .new-invoice p {
@@ -409,8 +454,7 @@ footer button {
 .new-invoice input {
   width: 100%;
   outline: none;
-  border: 1px solid #d5d7e3;
-  background-color: #f8f8fb;
+  border: 1px solid #e4e5ed;
   border-radius: 4px;
   font-size: 12px;
   font-weight: bold;
@@ -445,12 +489,14 @@ form div {
   color: #888eb0;
 }
 .item-list button {
-  background-color: #f8f8fb;
+  background-color: #fff;
   padding: 10px;
   margin-top: 50px;
+  position: absolute;
+  right: 5px;
 }
 .new-item {
-  background: #f5f6fd;
+  background: #f7f8fe;
   color: #7e88c3;
   width: 100%;
   margin-bottom: 30px;
@@ -477,6 +523,177 @@ form div {
 .modal-content button {
   margin-top: 30px;
 }
-.modal-dialog {
-  margin: 0 20px;
+.modal {
+  padding: 20px;
+}
+.columns {
+  display: none;
+}
+@media (min-width: 768px) {
+  header {
+    height: 80px;
+  }
+  nav {
+    margin-top: 80px;
+  }
+  h1 {
+    font-size: 32px;
+  }
+  .invoices-num span,
+  .filter span,
+  .new span {
+    display: inline;
+  }
+  .logo {
+    width: 80px;
+  }
+  .logo img {
+    height: 29px;
+  }
+  .invoice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 5px 12px 24px;
+  }
+  .invoice::after {
+    display: none;
+  }
+  .invoice p {
+    float: none;
+    margin: 0;
+    top: 0;
+  }
+  .invoice .single-invoice-num {
+    order: 1;
+  }
+  .invoice .name {
+    order: 3;
+    width: 110px;
+  }
+  .invoice .date {
+    order: 2;
+    width: 120px;
+  }
+  .invoice .total {
+    order: 4;
+    width: 120px;
+  }
+  .invoice .status {
+    order: 5;
+  }
+  .invoice-header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 80px;
+  }
+  .invoice-header .address {
+    margin-top: 0;
+    text-align: right;
+  }
+  .open {
+    display: block;
+  }
+  .empty img {
+    width: 240px;
+  }
+  .empty span:nth-child(1) {
+    display: none;
+  }
+  .empty span:nth-child(2) {
+    display: inline;
+  }
+  .empty p:nth-child(3) {
+    width: 250px;
+  }
+  .empty span span {
+    display: inline !important;
+  }
+  .invoice-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+  }
+  .invoice-nav .status {
+    margin: 0 0 0 20px;
+  }
+  .invoice-nav div {
+    display: flex;
+    align-items: center;
+  }
+  .invoice-nav .navbar {
+    display: flex;
+  }
+  .main-footer {
+    display: none;
+  }
+  .offcanvas-start,
+  .offcanvas-backdrop {
+    top: 80px;
+  }
+  .offcanvas-start {
+    width: 620px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  .footer-edit {
+    margin-top: 0;
+    border-top-right-radius: 20px;
+  }
+  .footer-new {
+    justify-content: flex-end;
+  }
+  .footer-new .cancel {
+    margin-right: auto;
+  }
+  .form-header p {
+    margin-bottom: 30px;
+  }
+  .amount .row div:nth-child(1) {
+    order: 1;
+  }
+  .amount .row div:nth-child(2) {
+    order: 4;
+    text-align: right;
+  }
+  .amount .row div:nth-child(3) {
+    order: 2;
+    text-align: center;
+  }
+  .amount .row div:nth-child(4) {
+    order: 3;
+    text-align: right;
+  }
+  .amount .total {
+    top: 0;
+  }
+  .amount .quantity {
+    width: 104px;
+    padding-right: 15px;
+  }
+  .amount .quantity span {
+    display: none;
+  }
+  .columns {
+    display: flex;
+  }
+  .columns p {
+    font-size: 12px;
+    color: #7e88c3;
+    font-weight: 500;
+  }
+  .grand-total-container span:nth-child(1) {
+    display: none;
+  }
+  .grand-total-container span:nth-child(2) {
+    display: block;
+  }
+  .modal-content {
+    padding: 30px;
+  }
+  .modal-content p:nth-child(1) {
+    font-size: 24px;
+  }
 }
