@@ -10,6 +10,12 @@
 @lightGray: #F9FAFE;
 @red: #EC5757;
 
+// Dark mode colors
+
+@darkModeBlue: #1E2139;
+@darkModeDarkBlue: #141625;
+
+
 html * {
     margin: 0;
     padding: 0;
@@ -18,10 +24,12 @@ html * {
 body {
     background-color: @darkWhite;
     font-family: 'Spartan', sans-serif;
+    transition: 0.2s;
 }
 
 p {
     font-size: 12px;
+    cursor: default;
 }
 
 header {
@@ -88,6 +96,10 @@ header {
     cursor: pointer;
 }
 
+.theme-switch-dark {
+    display: none;
+}
+
 nav {
     margin-bottom: 30px;
     margin-top: 72px;
@@ -108,6 +120,7 @@ nav {
 .filter {
     font-size: 12px;
     font-weight: 700;
+    cursor: pointer;
 
     span {
         display: none;
@@ -128,6 +141,7 @@ button {
     font-size: 12px;
     margin: 0 5px;
     font-weight: 700;
+    transition: 0.2s;
 
 }
 
@@ -151,6 +165,7 @@ h1 {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 3px;
+    cursor: default;
 }
 
 .invoices-num {
@@ -175,14 +190,21 @@ main {
 
 .invoice {
     background-color: #fff;
+    border: 1px solid #fff;
     color: @gray;
     padding: 24px;
+    cursor: pointer;
     border-radius: 8px;
     margin-bottom: 15px;
+    transition: border 0.2s, background-color 0.2s;
 
     &::after {
         content: 'clear';
         opacity: 0;
+    }
+
+    p {
+        cursor: pointer;
     }
 
 
@@ -208,6 +230,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-transform: capitalize;
 
 
     &::before {
@@ -216,9 +239,6 @@ main {
         width: 8px;
         border-radius: 100px;
         margin-right: 8px;
-        // position: absolute;
-        //  left: 16px;
-        //    top: 14px;
     }
 }
 
@@ -279,9 +299,7 @@ main {
 
 .empty {
     display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    text-align: center;
 
 
     img {
@@ -300,6 +318,7 @@ main {
         color: @gray;
         width: 220px;
         text-align: center;
+        display: inline-block;
 
     }
 
@@ -320,7 +339,8 @@ main {
 
 .current-invoice {
 
-    //  display: none;
+    display: none;
+
     .navbar {
         display: none;
     }
@@ -390,7 +410,7 @@ main {
 
 }
 
-.subject {
+.description {
     clear: both;
 }
 
@@ -427,6 +447,12 @@ main {
 
     .row:nth-last-child(1) {
         margin-bottom: 0;
+    }
+
+    .total {
+        top: 15px;
+        position: relative;
+        text-align: right;
     }
 
 }
@@ -479,16 +505,18 @@ main {
     background-color: @red;
 }
 
-.total {
-    top: 15px;
-    position: relative;
-    text-align: right;
-}
-
 .edit,
 .cancel {
     color: @darkPurple;
     background-color: lighten(@darkBlue, 70%);
+}
+
+.edit {
+    display: none;
+}
+
+.paid {
+    display: none;
 }
 
 .draft {
@@ -523,24 +551,37 @@ footer {
     justify-content: center;
     padding: 20px 0px;
     margin-top: 60px;
-    //  display: none;
 
     button {
         padding: 16px 18px;
-        //  display: none;
     }
+}
+
+.main-footer {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.main-footer.show {
+    opacity: 1;
+    visibility: visible
 }
 
 .footer-edit {
     justify-content: flex-end;
-    padding-right: 20px;
+    padding-right: 25px;
+}
+
+.footer-new {
+    padding-left: 45px;
+    padding-right: 45px;
 }
 
 .back {
     background-color: @darkWhite;
     color: #000;
     padding: 0;
-    // display: none;
+    display: none;
 
     img {
         margin-right: 25px;
@@ -557,10 +598,13 @@ footer {
     width: 100%;
 }
 
+.offcanvas-body {
+    padding: 10px 30px;
+}
+
 .edit-invoice,
 .new-invoice {
 
-    //  display: none;
 
     background-color: #fff;
     overflow: auto;
@@ -581,19 +625,27 @@ footer {
         opacity: 0.5;
     }
 
-    input {
-        width: 100%;
-        outline: none;
-        border: 1px solid lighten(@gray, 30%);
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 15px 18px;
-    }
-
     .row {
         margin-bottom: 25px;
     }
+}
+
+input {
+    width: 100%;
+    outline: none;
+    border: 1px solid lighten(@gray, 30%);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 15px 18px;
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+    transition: 0.2s;
+}
+
+#edit-payment-terms {
+    cursor: pointer;
 }
 
 form {
@@ -622,12 +674,13 @@ form {
         color: darken(@gray, 5%);
     }
 
-    .total {
+    .item-total {
         top: 0;
         text-align: left;
         border: 0;
         padding: 15px 0;
         color: @gray;
+        font-size: 12px;
     }
 
     button {
@@ -639,14 +692,21 @@ form {
     }
 }
 
+
 .new-item {
     background: darken(@lightGray, 0.5%);
     color: @darkGray;
     width: 100%;
-    margin-bottom: 30px;
+    margin: 30px 0;
+    transition: 0.2s;
+
+    img {
+        height: 8px;
+    }
 }
 
-.shadow {
+.shadow.footer-edit,
+.shadow.footer-new {
     box-shadow: 0px 50px 50px 50px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -681,7 +741,483 @@ form {
     display: none;
 }
 
+.filter-dropdown {
+    border-radius: 8px;
+    padding: 10px;
+    width: 180px;
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    top: 50px;
+    left: -30px;
+    display: none;
+
+    div {
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .clicked {
+        span {
+            background-color: @darkPurple;
+            border-color: @darkPurple;
+        }
+
+        img {
+            opacity: 1;
+        }
+    }
+
+    span {
+        height: 16px;
+        width: 16px;
+        border: 1px solid lighten(@darkPurple, 25%);
+        display: inline-flex !important;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2px;
+        background-color: lighten(@darkPurple, 25%);
+        cursor: pointer;
+        transition: 0.2s;
+
+        img {
+            margin: 0;
+            opacity: 0;
+            transition: 0.2s;
+        }
+    }
+
+    label {
+        margin-left: 10px;
+        cursor: pointer;
+    }
+}
+
+.payment-terms-dropdown {
+    border-radius: 8px;
+    position: absolute;
+    right: 12px;
+    left: 12px;
+    background-color: #fff;
+    z-index: 10;
+    display: none;
+
+    li {
+        list-style: none;
+        padding: 18px 25px;
+        border-top: 1px solid lighten(@gray, 30%);
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:first-child {
+            border: 0;
+        }
+    }
+}
+
+#ui-datepicker-div {
+    background-color: #fff;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    padding: 14px;
+    border-radius: 8px;
+    display: none;
+    z-index: 2000 !important;
+
+    thead {
+        display: none;
+    }
+
+    td {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        width: 30px;
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+        transition: 0.2s;
+    }
+
+    .ui-datepicker-other-month {
+        a {
+            opacity: 0.1;
+        }
+    }
+
+    .ui-datepicker-title {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 20px;
+    }
+
+    .ui-datepicker-prev {
+        position: absolute;
+        left: 10px;
+        padding: 10px;
+        top: 25px;
+
+        span {
+            width: 10px;
+            height: 12px;
+            display: block;
+            overflow: hidden;
+            background-image: url("/img/icon-arrow-left.svg");
+            background-repeat: no-repeat;
+            color: transparent;
+        }
+    }
+
+    .ui-datepicker-next {
+        position: absolute;
+        right: 10px;
+        padding: 10px;
+        top: 25px;
+
+        span {
+            width: 10px;
+            height: 12px;
+            display: block;
+            overflow: hidden;
+            background-image: url("/img/icon-arrow-right.svg");
+            background-repeat: no-repeat;
+            color: transparent;
+        }
+    }
+}
+
+.placeholder {
+    cursor: pointer;
+    background-color: initial;
+    font-size: 12px;
+    font-weight: 700;
+    position: absolute;
+    top: 64px;
+    left: 30px;
+}
+
+.delete-item {
+    transition: 0s;
+}
+
+.errors {
+    li {
+        color: @red;
+        font-size: 10px;
+        list-style: none;
+        font-weight: 700;
+        display: none;
+
+        &::before {
+            content: '-';
+            margin: 0 2px;
+        }
+    }
+}
+
+label.error,
+p.error {
+    color: @red;
+}
+
+p.error {
+    font-size: 9px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+.error {
+    border-color: @red;
+}
+
+.dark {
+    background-color: @darkModeDarkBlue;
+
+    .theme-switch-light {
+        display: none;
+    }
+
+    .theme-switch-dark {
+        display: flex;
+    }
+
+
+    h1 {
+        color: #fff;
+    }
+
+    .invoices-num {
+        p {
+            color: lighten(@gray, 15%);
+        }
+    }
+
+    .filter {
+        color: #fff;
+    }
+
+    header,
+    .invoice {
+        background-color: @darkModeBlue;
+    }
+
+    .invoice {
+        border-color: @darkModeBlue;
+    }
+
+    .single-invoice-num {
+        color: @darkGray;
+
+        span {
+            color: #fff;
+        }
+    }
+
+    .name,
+    .date {
+        color: lighten(@gray, 15%);
+    }
+
+    p {
+        color: #fff;
+    }
+
+    .status-pending {
+        background-color: fade(@orange, 6%);
+        color: @orange;
+    }
+
+    .status-paid {
+        background-color: fade(@green, 5%);
+        color: @green;
+    }
+
+    .status-draft {
+        background-color: fade(#fff, 5%);
+        color: #fff;
+
+        &::before {
+            background-color: #fff;
+        }
+    }
+
+    .empty {
+        p:nth-child(3) {
+            color: darken(#fff, 20%);
+        }
+    }
+
+    .back {
+        background-color: @darkModeDarkBlue;
+        color: #fff;
+    }
+
+    .invoice-nav,
+    .invoice-info {
+        background-color: @darkModeBlue;
+    }
+
+
+
+    .invoice-info {
+
+        p {
+            color: darken(#fff, 20%);
+        }
+
+        .invoice-date,
+        .payment-due,
+        .name,
+        .email {
+            color: #fff;
+        }
+    }
+
+    .amount {
+        background-color: lighten(@darkModeBlue, 3%);
+
+        p {
+            color: #fff;
+        }
+    }
+
+    .quantity,
+    .price {
+        p {
+            color: fade(#fff, 40%);
+        }
+    }
+
+    .grand-total-container {
+        background-color: #000;
+
+        .grand-total {
+            color: #fff;
+        }
+    }
+
+    footer {
+        background-color: @darkModeBlue;
+    }
+
+    .edit {
+        background-color: fade(#fff, 5%);
+        color: #fff;
+    }
+
+    .edit-invoice,
+    .new-invoice {
+        background-color: @darkModeDarkBlue;
+
+        label {
+            color: fade(#fff, 50%);
+        }
+
+        p {
+            color: @darkPurple;
+        }
+
+        .form-header {
+            p {
+                color: #fff;
+            }
+        }
+    }
+
+    input {
+        border-color: lighten(@darkModeBlue, 5%);
+        color: #fff;
+    }
+
+    .delete-item {
+        background-color: @darkModeDarkBlue;
+    }
+
+    .item-list {
+        p {
+            color: fade(#fff, 50%);
+        }
+
+        .total {
+            background-color: @darkModeDarkBlue;
+            color: fade(#fff, 50%);
+        }
+    }
+
+    .new-item,
+    .cancel {
+        background-color: lighten(@darkModeBlue, 3%);
+        color: fade(#fff, 50%);
+    }
+
+    .draft {
+        color: fade(#fff, 50%);
+    }
+
+    .new-item {
+        span {
+            -webkit-mask-image: url("/img/icon-plus.svg");
+            mask-image: url("/img/icon-plus.svg");
+            background-color: fade(#fff, 50%);
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+
+
+
+
+            img {
+                opacity: 0;
+            }
+        }
+    }
+
+    .modal-content {
+        background-color: @darkModeBlue;
+
+        p:first-child {
+            color: #fff;
+        }
+
+        p {
+            color: @gray;
+        }
+    }
+
+    .open {
+        background-color: @darkModeBlue;
+    }
+
+    .filter-dropdown {
+        background-color: lighten(@darkModeBlue, 5%);
+    }
+
+    .filter-dropdown.shadow {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .35) !important;
+
+        span {
+            background-color: @darkModeDarkBlue;
+            border-color: @darkModeDarkBlue;
+        }
+
+
+        .clicked {
+            span {
+                background-color: @darkPurple;
+                border-color: @darkPurple;
+            }
+        }
+    }
+
+    .placeholder {
+        color: #fff;
+    }
+
+    .payment-terms-dropdown {
+        background-color: lighten(@darkModeBlue, 5%);
+
+        li {
+            color: #fff;
+            border-color: @darkModeDarkBlue;
+        }
+    }
+
+    #ui-datepicker-div {
+        background-color: lighten(@darkModeBlue, 5%);
+
+        a {
+            color: #fff;
+        }
+
+        .ui-datepicker-other-month {
+            a {
+                color: fade(#fff, 70%);
+            }
+        }
+
+        .ui-datepicker-title {
+            color: #fff;
+        }
+    }
+}
+
 @media (min-width:768px) {
+
+    .container {
+        width: 730px;
+    }
+
     header {
         height: 80px;
     }
@@ -733,7 +1269,7 @@ form {
 
         .name {
             order: 3;
-            width: 110px;
+            width: 140px;
         }
 
         .date {
@@ -813,6 +1349,12 @@ form {
         }
     }
 
+    .invoice-info {
+        .single-invoice-num {
+            font-size: 16px;
+        }
+    }
+
 
     .main-footer {
         display: none;
@@ -829,9 +1371,14 @@ form {
         border-bottom-right-radius: 20px;
     }
 
+    .offcanvas-body {
+        padding: 30px 50px;
+    }
+
     .footer-edit {
         margin-top: 0;
         border-top-right-radius: 20px;
+        padding-right: 45px;
     }
 
     .footer-new {
@@ -911,5 +1458,195 @@ form {
             font-size: 24px;
         }
     }
+
+    .new {
+        margin-left: 40px;
+    }
+
+    .dark {
+
+        .footer-edit,
+        .footer-new {
+            background-color: @darkModeDarkBlue;
+        }
+    }
 }
 
+@media (min-width:1400px) {
+
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100px;
+        height: 100%;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        .logo {
+            width: 100%;
+            height: 100px;
+            margin-bottom: auto;
+            order: 1;
+        }
+
+        .account {
+            border-left: 0;
+            border-top: 1px solid @lightBlue;
+            order: 3;
+            height: 100px;
+            width: 100%;
+        }
+
+        .theme-switch {
+            order: 2;
+            height: 100px;
+            width: 100%;
+        }
+    }
+
+    nav {
+        margin-top: 40px;
+    }
+
+    .offcanvas-start,
+    .offcanvas-backdrop {
+        top: 0;
+        left: 100px;
+    }
+
+    .new:hover,
+    .paid:hover,
+    .save:hover {
+        background-color: @lightPurple;
+    }
+
+    .draft:hover {
+        background-color: darken(@gray, 50%);
+    }
+
+    .invoice:hover {
+        border-color: @darkPurple;
+    }
+
+    .filter-dropdown {
+        div:hover {
+            span {
+                border-color: @darkPurple;
+            }
+        }
+
+    }
+
+    .edit:hover,
+    .cancel:hover {
+        color: @darkGray;
+        background-color: lighten(@gray, 30%);
+    }
+
+    .delete:hover {
+        background-color: lighten(@red, 10%);
+    }
+
+    .back:hover {
+        color: @darkGray;
+    }
+
+    input:hover,
+    input:focus {
+        border-color: @darkPurple;
+    }
+
+    .payment-terms-dropdown {
+        li:hover {
+            color: @darkPurple;
+        }
+    }
+
+    .new-item:hover {
+        background: darken(@lightGray, 5%);
+    }
+
+    #ui-datepicker-div {
+        a:hover {
+            color: @lightPurple;
+        }
+    }
+
+    .theme-switch:hover {
+        background-color: @lightGray;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+
+
+
+        img {
+            opacity: 0;
+        }
+    }
+
+    .theme-switch-light:hover {
+        -webkit-mask-image: url("/img/icon-moon.svg");
+        mask-image: url("/img/icon-moon.svg");
+    }
+
+    .theme-switch-dark:hover {
+        -webkit-mask-image: url("/img/icon-sun.svg");
+        mask-image: url("/img/icon-sun.svg");
+    }
+
+    .delete-item:hover {
+        background-color: @red;
+        -webkit-mask-image: url("/img/icon-delete.svg");
+        mask-image: url("/img/icon-delete.svg");
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+
+        img {
+            opacity: 0;
+        }
+    }
+
+    .dark {
+        .filter-dropdown.shadow {
+
+            div:hover {
+                span {
+                    border-color: @darkPurple;
+                }
+            }
+
+        }
+
+        .new:hover,
+        .paid:hover,
+        .save:hover {
+            background-color: lighten(@lightPurple, 5%);
+        }
+
+        .delete:hover {
+            background-color: lighten(@red, 15%);
+        }
+
+        .back:hover {
+            color: @gray;
+        }
+
+        .error,
+        .error:hover {
+            border-color: @red;
+        }
+
+        .draft:hover {
+            background-color: @darkModeBlue;
+        }
+
+        .payment-terms-dropdown {
+            margin-top: 5px;
+        }
+    }
+}

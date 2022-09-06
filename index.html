@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+
 </head>
 
 <body>
@@ -20,7 +22,7 @@
                         <p>Confirm Deletion</p>
                         <p>Are you sure you want to delete invoice #<span>XM9141</span>? This action cannot be undone.</p>
                         <button class="cancel" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                        <button class="delete">Delete</button>
+                        <button class="delete" data-bs-dismiss="modal">Delete</button>
                     </div>
                 </div>
             </div>
@@ -32,100 +34,64 @@
             <div class="account">
                 <img src="img/image-avatar.jpg" alt="">
             </div>
-            <div class="theme-switch">
+            <div class="theme-switch theme-switch-light">
                 <img src="img/icon-moon.svg" alt="">
+            </div>
+            <div class="theme-switch theme-switch-dark">
+                <img src="img/icon-sun.svg" alt="">
             </div>
         </header>
         <nav>
             <div class="container">
                 <div class="invoices-num">
                     <h1>Invoices</h1>
-                    <p><span>There are </span><span id="total-invoices">7</span><span> total</span> invoices</p>
+                    <p></p>
                 </div>
                 <div class="navbar">
-                    <div class="filter">Filter<span> by status</span> <img src="img/icon-arrow-down.svg" alt=""></div>
+                    <div class="filter">
+                        Filter<span> by status</span>
+                        <img src="img/icon-arrow-down.svg" alt="">
+                        <div class="filter-dropdown shadow">
+                            <div>
+                                <span id="draft">
+                                    <img src="img/icon-check.svg" alt="">
+                                </span>
+                                <label for="#draft">Draft</label>
+                            </div>
+                            <div>
+                                <span id="pending">
+                                    <img src="img/icon-check.svg" alt="">
+                                </span>
+                                <label for="#pending">Pending</label>
+                            </div>
+                            <div>
+                                <span id="paid">
+                                    <img src="img/icon-check.svg" alt="">
+                                </span>
+                                <label for="#paid">Paid</label>
+                            </div>
+                        </div>
+                    </div>
                     <button class="new" data-bs-toggle="offcanvas" data-bs-target="#new-invoice" aria-controls="new-invoice"><img src="img/icon-plus.svg" alt="">New <span>Invoice</span></button>
                 </div>
-                <!-- <button class="back"><img src="img/icon-arrow-left.svg" alt="">Go back</button> -->
+                <button class="back"><img src="img/icon-arrow-left.svg" alt="">Go back</button>
             </div>
         </nav>
         <main>
             <div class="container">
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">n Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>180.90</span></p>
-                    <p class="status status-paid">Paid</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-draft">Draft</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-pending">Pending</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-pending">Pending</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-paid">Paid</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-draft">Draft</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-pending">Pending</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
-                <div class="invoice">
-                    <p class="single-invoice-num">#<span>rt3080</span></p>
-                    <p class="name">Jensen Huang</p>
-                    <p class="date">Due <span>19 Aug 2021</span></p>
-                    <p class="total">£<span>1800.90</span></p>
-                    <p class="status status-pending">Pending</p>
-                    <button class="open"><img src="img/icon-arrow-right.svg" alt=""></button>
-                </div>
+
 
                 <div class="empty">
                     <img src="img/illustration-empty.svg" alt="">
                     <p>There is nothing here</p>
                     <p>Create <span>an</span> <span>a new</span> invoice by clicking the <span>New <span>Invoice</span></span> button and get started</p>
                 </div>
+
                 <div class="current-invoice">
                     <div class="invoice-nav">
                         <div>
                             <p>Status</p>
-                            <p class="status status-pending">Pending</p>
+                            <p class="status"></p>
                         </div>
                         <div class="navbar">
                             <button class="edit" data-bs-toggle="offcanvas" data-bs-target="#edit-invoice" aria-controls="edit-invoice">Edit</button>
@@ -137,7 +103,7 @@
                         <div class="row">
                             <div class="col-12 invoice-header">
                                 <p class="single-invoice-num">#<span>XM9141</span></p>
-                                <p class="subject">Graphic Design</p>
+                                <p class="description">Graphic Design</p>
                                 <div class="address">
                                     <p class="street">19 Union Terrace</p>
                                     <p class="city">London</p>
@@ -146,13 +112,13 @@
                                 </div>
 
                             </div>
-                            <div class="col-6 col-md-4">
+                            <div class="col-6 col-md-3">
                                 <p>Invoice Date</p>
                                 <p class="invoice-date">21 Aug 2021</p>
                                 <p>Payment Due</p>
                                 <p class="payment-due">20 Sep 2021</p>
                             </div>
-                            <div class="col-6 col-md-4">
+                            <div class="col-6 col-md-3">
                                 <p>Bill to</p>
                                 <div class="name">Alex Grim</div>
                                 <div class="billing-address">
@@ -162,7 +128,7 @@
                                     <p class="country">United Kingdom</p>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4">
+                            <div class="col-12 col-md-6">
                                 <p>Sent to</p>
                                 <p class="email">alexgrim@gmail.com</p>
                             </div>
@@ -197,20 +163,7 @@
                                     <p>£ 156.00</p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <p>Email Design</p>
-                                </div>
-                                <div class="col-6 total">
-                                    <p>£ 400.00</p>
-                                </div>
-                                <div class="col quantity">
-                                    <p>12<span>x</span></p>
-                                </div>
-                                <div class="col p-0 price">
-                                    <p>£ 200.00</p>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="grand-total-container">
                             <p><span>Grand Total</span><span>Amount Due</span></p>
@@ -218,126 +171,101 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="edit-invoice" aria-labelledby="offcanvasExampleLabel">
                     <div class="edit-invoice">
                         <div class="offcanvas-body">
-                            <form action="">
+                            <form>
                                 <div class="form-header">
                                     <p>Edit <span>#</span><span>XM9141</span></p>
                                 </div>
                                 <div class="row">
                                     <p>Bill from</p>
                                     <div class="col-12">
-                                        <label for="bill-from-address">Street Address</label>
-                                        <input type="text" id="bill-from-address">
+                                        <label for="edit-bill-from-address">Street Address</label>
+                                        <input type="text" id="edit-bill-from-address">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-from-city">City</label>
-                                        <input type="text" id="bill-from-city">
+                                        <label for="edit-bill-from-city">City</label>
+                                        <input type="text" id="edit-bill-from-city">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-from-postcode">Post Code</label>
-                                        <input type="text" id="bill-from-postcode">
+                                        <label for="edit-bill-from-postcode">Post Code</label>
+                                        <input type="text" id="edit-bill-from-postcode">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label for="bill-from-country">Country</label>
-                                        <input type="text" id="bill-from-country">
+                                        <label for="edit-bill-from-country">Country</label>
+                                        <input type="text" id="edit-bill-from-country">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <p>Bill to</p>
                                     <div class="col-12">
-                                        <label for="name">Client's Name</label>
-                                        <input type="text" id="name">
+                                        <label for="edit-name">Client's Name</label>
+                                        <input type="text" id="edit-name">
                                     </div>
                                     <div class="col-12">
-                                        <label for="email">Client's Email</label>
-                                        <input type="text" id="email">
+                                        <label for="edit-email">Client's Email</label>
+                                        <input type="text" id="edit-email">
+                                        <span class="placeholder">e.g. mail@mail.com</span>
                                     </div>
                                     <div class="col-12">
-                                        <label for="bill-to-address">Street Address</label>
-                                        <input type="text" id="bill-to-address">
+                                        <label for="edit-bill-to-address">Street Address</label>
+                                        <input type="text" id="edit-bill-to-address">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-to-city">City</label>
-                                        <input type="text" id="bill-to-city">
+                                        <label for="edit-bill-to-city">City</label>
+                                        <input type="text" id="edit-bill-to-city">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-to-postcode">Post Code</label>
-                                        <input type="text" id="bill-to-postcode">
+                                        <label for="edit-bill-to-postcode">Post Code</label>
+                                        <input type="text" id="edit-bill-to-postcode">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label for="bill-to-country">Country</label>
-                                        <input type="text" id="bill-to-country">
+                                        <label for="edit-bill-to-country">Country</label>
+                                        <input type="text" id="edit-bill-to-country">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                        <label for="invoice-date">Invoice Date</label>
-                                        <input type="text" id="invoice-date">
+                                        <label for="edit-invoice-date">Invoice Date</label>
+                                        <input type="text" id="edit-invoice-date">
                                         <img class="calendar" src="img/icon-calendar.svg" alt="">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <label for="payment-terms">Payment Terms</label>
-                                        <input type="text" id="payment-terms">
+                                        <label for="edit-payment-terms">Payment Terms</label>
+                                        <input type="text" id="edit-payment-terms" class="payment-terms" readonly>
                                         <img class="dropdown-button" src="img/icon-arrow-down.svg" alt="">
+                                        <div class="payment-terms-dropdown shadow">
+                                            <ul>
+                                                <li class="term">Net <span>1</span> Day</li>
+                                                <li class="term">Net <span>7</span> Days</li>
+                                                <li class="term">Net <span>14</span> Days</li>
+                                                <li class="term">Net <span>20</span> Days</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="project-description">Project description</label>
-                                        <input type="text" id="project-description">
+                                        <label for="edit-project-description">Project description</label>
+                                        <input type="text" id="edit-project-description">
+                                        <span class="placeholder">e.g. mail@mail.com</span>
                                     </div>
                                 </div>
                                 <div class="item-list">
                                     <p>Item list</p>
-                                    <div class="row item-1">
-                                        <div class="col-12 col-md-4">
-                                            <label for="item-1-name">Item Name</label>
-                                            <input type="text" id="item-1-name">
-                                        </div>
-                                        <div class="col-3 col-md-2">
-                                            <label for="item-1-quantity">Qty.</label>
-                                            <input type="text" id="item-1-quantity">
-                                        </div>
-                                        <div class="col-4 col-md-3">
-                                            <label for="item-1-price">Price</label>
-                                            <input type="text" id="item-1-price">
-                                        </div>
-                                        <div class="col-3 col-md-2">
-                                            <label for="item-1-total">Total</label>
-                                            <input type="text" id="item-1-total" class="total">
-                                        </div>
-                                        <div class="col-2 col-md-1">
-                                            <button><img src="img/icon-delete.svg" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="row item-2">
-                                        <div class="col-12">
-                                            <label for="item-2-name">Item Name</label>
-                                            <input type="text" id="item-2-name">
-                                        </div>
-                                        <div class="col-2">
-                                            <label for="item-2-quantity">Qty.</label>
-                                            <input type="text" id="item-2-quantity">
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="item-2-price">Price</label>
-                                            <input type="text" id="item-2-price">
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="item-2-total">Total</label>
-                                            <input type="text" id="item-2-total" class="total">
-                                        </div>
-                                        <div class="col-2">
-                                            <button><img src="img/icon-delete.svg" alt=""></button>
-                                        </div>
-                                    </div>
                                 </div>
-                                <button class="new-item"><img src="img/icon-plus.svg" alt="">Add New Item</button>
+                                <button class="new-item" type="button"><span><img src="img/icon-plus.svg" alt=""></span>Add New Item</button>
+                                <div class="errors">
+                                    <ul>
+                                        <li class="empty-inputs">All fields must be added</li>
+                                        <li class="no-items">An item must be added</li>
+                                    </ul>
+                                </div>
                             </form>
                         </div>
                         <footer class="footer-edit shadow">
                             <button class="cancel" data-bs-dismiss="offcanvas" aria-label="Close">Cancel</button>
-                            <button class="save">Save changes</button>
+                            <button class="save" data-form="edit">Save changes</button>
                         </footer>
                     </div>
                 </div>
@@ -345,55 +273,55 @@
 
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="new-invoice" aria-labelledby="offcanvasExampleLabel">
                     <div class="new-invoice">
-                       <div class="offcanvas-body">
-                        <form action="">
+                        <div class="offcanvas-body">
+                            <form action="">
                                 <div class="form-header">
                                     <p>New Invoice</p>
                                 </div>
                                 <div class="row">
                                     <p>Bill from</p>
                                     <div class="col-12">
-                                        <label for="bill-from-address">Street Address</label>
-                                        <input type="text" id="bill-from-address">
+                                        <label for="new-bill-from-address">Street Address</label>
+                                        <input type="text" id="new-bill-from-address">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-from-city">City</label>
-                                        <input type="text" id="bill-from-city">
+                                        <label for="new-bill-from-city">City</label>
+                                        <input type="text" id="new-bill-from-city">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-from-postcode">Post Code</label>
-                                        <input type="text" id="bill-from-postcode">
+                                        <label for="new-bill-from-postcode">Post Code</label>
+                                        <input type="text" id="new-bill-from-postcode">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label for="bill-from-country">Country</label>
-                                        <input type="text" id="bill-from-country">
+                                        <label for="new-bill-from-country">Country</label>
+                                        <input type="text" id="new-bill-from-country">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <p>Bill to</p>
                                     <div class="col-12">
-                                        <label for="name">Client's Name</label>
-                                        <input type="text" id="name">
+                                        <label for="new-name">Client's Name</label>
+                                        <input type="text" id="new-name">
                                     </div>
                                     <div class="col-12">
-                                        <label for="email">Client's Email</label>
-                                        <input type="text" id="email">
+                                        <label for="new-email">Client's Email</label>
+                                        <input type="text" id="new-email">
                                     </div>
                                     <div class="col-12">
-                                        <label for="bill-to-address">Street Address</label>
-                                        <input type="text" id="bill-to-address">
+                                        <label for="new-bill-to-address">Street Address</label>
+                                        <input type="text" id="new-bill-to-address">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-to-city">City</label>
-                                        <input type="text" id="bill-to-city">
+                                        <label for="new-bill-to-city">City</label>
+                                        <input type="text" id="new-bill-to-city">
                                     </div>
                                     <div class="col-6 col-md-4">
-                                        <label for="bill-to-postcode">Post Code</label>
-                                        <input type="text" id="bill-to-postcode">
+                                        <label for="new-bill-to-postcode">Post Code</label>
+                                        <input type="text" id="new-bill-to-postcode">
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label for="bill-to-country">Country</label>
-                                        <input type="text" id="bill-to-country">
+                                        <label for="new-bill-to-country">Country</label>
+                                        <input type="text" id="new-bill-to-country">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -403,69 +331,42 @@
                                         <img class="calendar" src="img/icon-calendar.svg" alt="">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <label for="payment-terms">Payment Terms</label>
-                                        <input type="text" id="payment-terms">
+                                        <label for="new-payment-terms">Payment Terms</label>
+                                        <input type="text" id="new-payment-terms" class="payment-terms" readonly>
                                         <img class="dropdown-button" src="img/icon-arrow-down.svg" alt="">
+                                        <div class="payment-terms-dropdown shadow">
+                                            <ul>
+                                                <li class="term">Net <span>1</span> Day</li>
+                                                <li class="term">Net <span>7</span> Days</li>
+                                                <li class="term">Net <span>14</span> Days</li>
+                                                <li class="term">Net <span>20</span> Days</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="project-description">Project description</label>
-                                        <input type="text" id="project-description">
+                                        <label for="new-project-description">Project description</label>
+                                        <input type="text" id="new-project-description">
                                     </div>
                                 </div>
                                 <div class="item-list">
                                     <p>Item list</p>
-                                    <div class="row item-1">
-                                        <div class="col-12 col-md-4">
-                                            <label for="item-1-name">Item Name</label>
-                                            <input type="text" id="item-1-name">
-                                        </div>
-                                        <div class="col-3 col-md-2">
-                                            <label for="item-1-quantity">Qty.</label>
-                                            <input type="text" id="item-1-quantity">
-                                        </div>
-                                        <div class="col-4 col-md-3">
-                                            <label for="item-1-price">Price</label>
-                                            <input type="text" id="item-1-price">
-                                        </div>
-                                        <div class="col-3 col-md-2">
-                                            <label for="item-1-total">Total</label>
-                                            <input type="text" id="item-1-total" class="total">
-                                        </div>
-                                        <div class="col-2 col-md-1">
-                                            <button><img src="img/icon-delete.svg" alt=""></button>
-                                        </div>
-                                    </div>
-                                    <div class="row item-2">
-                                        <div class="col-12">
-                                            <label for="item-2-name">Item Name</label>
-                                            <input type="text" id="item-2-name">
-                                        </div>
-                                        <div class="col-2">
-                                            <label for="item-2-quantity">Qty.</label>
-                                            <input type="text" id="item-2-quantity">
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="item-2-price">Price</label>
-                                            <input type="text" id="item-2-price">
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="item-2-total">Total</label>
-                                            <input type="text" id="item-2-total" class="total">
-                                        </div>
-                                        <div class="col-2">
-                                            <button><img src="img/icon-delete.svg" alt=""></button>
-                                        </div>
-                                    </div>
+
                                 </div>
-                                <button class="new-item"><img src="img/icon-plus.svg" alt="">Add New Item</button>
+                                <button class="new-item" type="button"><img src="img/icon-plus.svg" alt="">Add New Item</button>
+                                <div class="errors">
+                                    <ul>
+                                        <li class="empty-inputs">All fields must be added</li>
+                                        <li class="no-items">An item must be added</li>
+                                    </ul>
+                                </div>
                             </form>
+                        </div>
+                        <footer class="footer-new shadow">
+                            <button class="cancel" data-bs-dismiss="offcanvas" aria-label="Close">Discard</button>
+                            <button class="draft">Save as draft</button>
+                            <button class="save" data-form="new">Save & Sent</button>
+                        </footer>
                     </div>
-                    <footer class="footer-new shadow">
-                        <button class="cancel" data-bs-dismiss="offcanvas" aria-label="Close">Discard</button>
-                        <button class="draft">Save as draft</button>
-                        <button class="save">Save & Sent</button>
-                    </footer>
-                </div>
                 </div>
             </div>
         </main>
@@ -476,5 +377,19 @@
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="js/script.js"></script>
-</body></html>
+    <script>
+        $(function() {
+            $("#edit-invoice-date, #new-invoice-date").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+            $("#edit-invoice-date, #new-invoice-date").datepicker("option", "dateFormat", "dd/mm/yy");
+        });
+
+    </script>
+</body>
+
+</html>
