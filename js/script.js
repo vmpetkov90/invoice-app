@@ -1,6 +1,5 @@
 let data;
 
-let updatedData = JSON.parse(localStorage.getItem("new_data"));
 
 let id;
 
@@ -34,7 +33,7 @@ $(".filter-dropdown div").on("click", function () {
 });
 
 function getData(filter = 'pending,draft,paid', id) {
-    $.getJSON("/data/data.json")
+    $.getJSON("./data/data.json")
         .done(function (result) {
             data = result;
             showInvoices(data, filter);
@@ -45,10 +44,10 @@ function getData(filter = 'pending,draft,paid', id) {
         })
 }
 
-if(updatedData){
-    data = updatedData;
+if (localStorage.getItem("new_data")) {
+    data = JSON.parse(localStorage.getItem("new_data"));
     showInvoices(data, 'pending,draft,paid');
-}else{
+} else {
     getData();
 }
 
@@ -298,14 +297,14 @@ function clearForm() {
     $(".no-items").hide();
     $("input").val("");
     $('#new-invoice-date').val(`${addZero(today.getDate())}/${addZero(today.getMonth()+1)}/${today.getFullYear()}`);
-    $('#new-payment-terms').attr('data-term','7').val('Net 7 Days')
-    
-    
+    $('#new-payment-terms').attr('data-term', '7').val('Net 7 Days')
+
+
 }
 
-function updateLocalStorage(){
+function updateLocalStorage() {
     localStorage.clear();
-    localStorage.setItem("new_data",JSON.stringify(data));
+    localStorage.setItem("new_data", JSON.stringify(data));
 }
 
 $("main").on("click", ".invoice", function () {
@@ -325,7 +324,7 @@ $(".back").on("click", function () {
     $(".invoice").toggle();
     $(".invoices-num,nav .navbar").toggle();
     $(".back").toggle();
-    
+
     showInvoices(data, 'pending,draft,paid');
 })
 
@@ -390,7 +389,7 @@ $(".save").on("click", function () {
         if (!$(this).val()) {
             empty++;
             $(this).addClass("error").prev().addClass("error");
-        }else{
+        } else {
             $(this).removeClass("error").prev().removeClass("error");
         }
     });
@@ -455,7 +454,7 @@ $(".save").on("click", function () {
     } else {
         $(".no-items").hide();
     }
-updateLocalStorage();
+    updateLocalStorage();
 });
 
 $(".draft").on("click", function () {
